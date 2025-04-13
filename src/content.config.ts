@@ -26,7 +26,7 @@ const companies = defineCollection({
         pubDate: z.coerce.date(),
         updatedDate: z.coerce.date().optional(),
         heroImage: z.string().optional(),
-        heroVideo: z.string()
+        heroVideo: z.string().optional()
     }),
 });
 

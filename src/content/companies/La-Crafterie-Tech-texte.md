@@ -1,7 +1,7 @@
 ---
-title: 'La Crafterie Tech'
+title: 'La Crafterie Tech, v2'
 description: 'On fait des logiciels robustes et évolutifs, en mettant vos besoins au cœur de notre démarche.'
-pubDate: 'Jul 08 2022'
+pubDate: 'May 08 2023'
 heroImage: '/LaCrafterieTech.webp'
 heroVideo: 'e3YhuBIS69Y'
 ---

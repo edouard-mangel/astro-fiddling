@@ -74,7 +74,12 @@ const {title, description, pubDate, updatedDate, heroImage, heroVideo} = Astro.p
         <div class="prose">
 
             <div>
-                <YouTube id={heroVideo}/>
+                {heroVideo &&
+                        <YouTube id={heroVideo}/>
+                }
+            </div>
+            <div class="hero-image">
+                {!heroVideo && heroImage && <img width={1020} height={510} src={heroImage} alt=""/>}
             </div>
             <div class="title">
                 <h1>{title}</h1>
