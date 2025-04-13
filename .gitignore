@@ -1,3 +1,12 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
 # Logs
 logs
 *.log
@@ -41,10 +50,12 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+pnpm-debug.log*
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
+# environment variables
 # TypeScript cache
 *.tsbuildinfo
 
@@ -74,6 +85,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
+.env.production
 .env.development.local
 .env.test.local
 .env.production.local
@@ -91,12 +103,16 @@ out
 .nuxt
 dist
 
+# macOS-specific files
+.DS_Store
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
+# jetbrains setting folder
+.idea/
 # vuepress build output
 .vuepress/dist
 
