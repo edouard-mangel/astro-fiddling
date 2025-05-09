@@ -1,40 +1,92 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import {SITE_TITLE, SITE_DESCRIPTION} from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-<head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}/>
-</head>
-<body>
-<Header/>
-<main>
-    <h1>🧑‍🚀 Hello, Luc et Manu !</h1>
-    <p>
-        Bienvenue sur Vitrinéo, la plateforme innovante pour créer votre carte de visite virtuelle et échanger des
-        recommandations professionnelles.
-    </p>
-    <p>
-        Ce site a été codé lors d'un voyage en train entre Strasbourg et Lyon.
-        Il est donc fort probable qu'il ne soit pas parfait, mais il est fonctionnel et prêt à être utilisé.
-    </p>
-    <p>Quelques infos intéressantes :</p>
-    <ul>
-        <li>Les liens de réseaux sociaux en haut à droite sont éditables, on peut aussi avoir des liens différents pour chaque entreprise. </li>
-        <li>Rajouter une entreprise n'est pas automatisé, mais ça me prend moins de 10 minutes</li>
-        <li>Une entreprise peut choisir un logo, ou une vidéo de présentation.</li>
-        <li>Des boutons de style peuvent être modifiés facilement</li>
-        <li>L'arbre de recommandation n'est pas fonctionnel, mais tant qu'il n'y a pas de clients, quel intérêt ?</li>
-        <li>Les textes ont été rédigés avec ChatGPT. Ils sont modifiables en quelques minutes.</li>
-    </ul>
-    <h3>
-        Have fun!
-    </h3>
-</main>
-<Footer/>
-</body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <h1>La Crafterie Tech</h1>
+            <h2>
+                Votre partenaire de confiance pour des solutions numériques
+                innovantes.
+            </h2>
+
+            <p>Bienvenue sur notre site.</p>
+
+            <p>
+                <strong>La Crafterie Tech</strong>, plus qu’une entreprise de
+                développement informatique ; nous sommes le partenaire engagé
+                qui vous accompagne dans la conception et la réalisation de
+                projets numériques sur mesure. Nous plaçons vos besoins au cœur
+                de notre démarche et utilisons notre expertise technique pour
+                transformer vos idées en solutions robustes et évolutives.
+            </p>
+            <h2 id="nos-valeurs">Nos Valeurs</h2>
+            <ul>
+                <li>
+                    <p>
+                        <strong>Orienté Client</strong><br />
+                        Votre succès est notre priorité. Nous prenons le temps de
+                        comprendre vos enjeux et vos ambitions afin de vous offrir
+                        une expérience personnalisée et une écoute attentive à chaque
+                        étape de votre projet.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Expertise Technique</strong><br />
+                        Notre équipe d’experts passionnés allie rigueur, innovation
+                        et savoir-faire pour concevoir des solutions performantes
+                        et adaptées aux défis technologiques actuels.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Partenariat Authentique</strong><br />
+                        Au-delà du simple rôle de prestataire, nous nous engageons
+                        à être votre partenaire de long terme. Nous cultivons une
+                        relation de confiance, basée sur la transparence et la collaboration,
+                        pour réaliser ensemble vos projets les plus ambitieux.
+                    </p>
+                </li>
+            </ul>
+            <h2 id="notre-approche">Notre Approche</h2>
+            <p>
+                Dans un monde en constante évolution, nous nous engageons à
+                simplifier la complexité et à rendre le digital accessible. Que
+                vous soyez une startup audacieuse ou une entreprise établie,
+                nous mettons notre expertise au service de votre transformation
+                numérique pour créer des solutions innovantes et sur mesure.
+            </p>
+            <p>
+                Découvrez comment nous pouvons, ensemble, donner vie à vos
+                ambitions et propulser votre entreprise vers de nouveaux
+                sommets.<br />
+                <a
+                    href="mailto:(mangel.edouard.pro@gmail.com)"
+                    title="me contacter"
+                >
+                    <strong
+                        >Prenez contact dès aujourd’hui et faisons équipe pour
+                        construire l’avenir de vos projets numériques !</strong
+                    >
+                </a>
+            </p>
+
+            <p>
+                Si vous avez le moindre besoin en développement, n'hésitez pas à
+                me contacter !
+            </p>
+            <h3>A bientôt j'espère !</h3>
+            <Footer />
+        </main>
+    </body>
 </html>
