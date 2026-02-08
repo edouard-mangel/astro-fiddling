@@ -15,19 +15,4 @@ const blog = defineCollection({
     }),
 });
 
-const companies = defineCollection({
-    // Load Markdown and MDX files in the `src/content/blog/` directory.
-    loader: glob({base: './src/content/companies', pattern: '**/*.{md,mdx}'}),
-    // Type-check frontmatter using a schema
-    schema: z.object({
-        title: z.string(),
-        description: z.string(),
-        // Transform string to Date object
-        pubDate: z.coerce.date(),
-        updatedDate: z.coerce.date().optional(),
-        heroImage: z.string().optional(),
-        heroVideo: z.string().optional()
-    }),
-});
-
-export const collections = {blog, companies};
+export const collections = {blog};

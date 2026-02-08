@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-La Crafterie Tech is an Astro-based static website showcasing custom development services. The site features two main content collections: blog posts and company/partner profiles.
+La Crafterie Tech is an Astro-based static website showcasing custom development services by Edouard Mangel, a software craftsman based in Strasbourg.
 
 ## Development Commands
 
@@ -29,34 +29,24 @@ pnpm astro [command]
 
 ### Content Collections
 
-The site uses Astro's Content Collections API with two main collections defined in `src/content.config.ts`:
+The site uses Astro's Content Collections API with one main collection defined in `src/content.config.ts`:
 
-1. **blog** - Blog posts loaded from `src/content/blog/`
-   - Supports Markdown and MDX files
-   - Required frontmatter: `title`, `description`, `pubDate`
-   - Optional frontmatter: `updatedDate`, `heroImage`
-
-2. **companies** - Partner/company profiles loaded from `src/content/companies/`
-   - Supports Markdown and MDX files
-   - Required frontmatter: `title`, `description`, `pubDate`
-   - Optional frontmatter: `updatedDate`, `heroImage`, `heroVideo` (YouTube video ID)
-   - When `heroVideo` is present, it takes precedence over `heroImage` and renders a YouTube embed via `astro-embed`
+**blog** - Blog posts loaded from `src/content/blog/`
+- Supports Markdown and MDX files
+- Required frontmatter: `title`, `description`, `pubDate`
+- Optional frontmatter: `updatedDate`, `heroImage`
 
 ### Routing Structure
 
-- `/` - Homepage with company values and approach (`src/pages/index.astro`)
+- `/` - Homepage with personal introduction, craft philosophy, awards, and call-to-action (`src/pages/index.astro`)
 - `/about` - About page using BlogPost layout (`src/pages/about.astro`)
 - `/blog/` - Blog listing page (`src/pages/blog/index.astro`)
 - `/blog/[...slug]` - Individual blog posts (`src/pages/blog/[...slug].astro`)
-- `/companies/` - Companies listing (`src/pages/companies/index.astro`)
-- `/companies/[...slug]` - Individual company profiles (`src/pages/companies/[...slug].astro`)
-- `/rss.xml` - RSS feed for blog posts only
+- `/rss.xml` - RSS feed for blog posts
 
 ### Layouts
 
 - `BlogPost.astro` - Standard blog post layout with hero image support
-- `CompanyDescription.astro` - Company profile layout with hero image OR YouTube video support
-- `CompaniesList.astro` - Listing layout for companies collection
 
 ### Global Configuration
 
@@ -76,17 +66,16 @@ The project uses very strict TypeScript settings:
 
 - `@astrojs/mdx` - MDX support for content
 - `@astrojs/sitemap` - Automatic sitemap generation
-- `@astrojs/rss` - RSS feed generation (blog collection only)
-- `astro-embed` - YouTube embed component for company profiles
+- `@astrojs/rss` - RSS feed generation
+- `astro-embed` - YouTube embed component (available for use in content)
 
 ## Content Guidelines
 
-When adding new blog posts or company profiles:
-1. Place files in the appropriate `src/content/blog/` or `src/content/companies/` directory
-2. Ensure all required frontmatter fields are present
+When adding new blog posts:
+1. Place files in the `src/content/blog/` directory
+2. Ensure all required frontmatter fields are present: `title`, `description`, `pubDate`
 3. Use `.md` or `.mdx` extensions
-4. For company profiles with videos, use `heroVideo: 'YOUTUBE_VIDEO_ID'` instead of `heroImage`
-5. The companies collection supports both still images and YouTube videos as hero content
+4. Optional fields: `updatedDate`, `heroImage`
 
 ## Static Assets
 
