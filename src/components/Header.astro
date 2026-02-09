@@ -5,7 +5,9 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<a href="/" class="logo-link">
+			<img src="/LaCrafterieTech_Logo_IconSquare.jpg" alt={SITE_TITLE} class="logo" />
+		</a>
 		<div class="internal-links">
 			<HeaderLink href="/">Accueil</HeaderLink>
 			<HeaderLink href="/about">A propos de nous</HeaderLink>
@@ -25,14 +27,19 @@ import { SITE_TITLE } from '../consts';
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+	.logo-link {
+		display: flex;
+		align-items: center;
+		padding: 0.5em 0;
+		border-bottom: none !important;
 	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+	.logo {
+		height: 50px;
+		width: auto;
+		transition: opacity 0.2s;
+	}
+	.logo:hover {
+		opacity: 0.8;
 	}
 	nav {
 		display: flex;
