@@ -49,6 +49,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
                 une conférence dédiée au software craftsmanship qui rassemble chaque année la communauté craft
                 autour de sessions techniques, de retours d'expérience et de discussions passionnées sur l'excellence logicielle.
             </p>
+            <a href="https://strasbourg-craft.fr" target="_blank" rel="noopener noreferrer" class="event-logo-link">
+                <img src="/logo_event_grand.svg" alt="Bretzel Craft Conference Logo" class="event-logo" />
+            </a>
 
             <h2>Expérience Reconnue</h2>
             <p>
@@ -113,5 +116,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         width: 800px;
         height: auto;
         margin: 2rem auto;
+    }
+    .event-logo-link {
+        display: block;
+        text-align: center;
+        margin: 2rem auto;
+        transition: opacity 0.2s;
+    }
+    .event-logo-link:hover {
+        opacity: 0.8;
+    }
+    .event-logo {
+        max-width: 100%;
+        width: 600px;
+        height: auto;
     }
 </style>
