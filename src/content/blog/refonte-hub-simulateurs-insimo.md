@@ -64,11 +64,11 @@ Cette approche a permis une flexibilité maximale pour ajuster le périmètre se
 
 ## Résultats Mesurables
 
-✅ **Livraison dans les temps** : Versions fonctionnelles des deux simulateurs avant la deadline
-✅ **Zéro bug** en production sur les fonctionnalités livrées
-✅ **Budget respecté** : Prédictions de timeline précises évitant les dérapages
-✅ **Transfert de connaissances** : Équipe InSimo autonome sur la nouvelle base de code
-✅ **Feedback client** : Intégration immédiate des retours utilisateurs
+- ✅ **Livraison dans les temps** : Versions fonctionnelles des deux simulateurs avant la deadline
+- ✅ **Zéro bug** en production sur les fonctionnalités livrées
+- ✅ **Budget respecté** : Prédictions de timeline précises évitant les dérapages
+- ✅ **Transfert de connaissances** : Équipe InSimo autonome sur la nouvelle base de code
+- ✅ **Feedback client** : Intégration immédiate des retours utilisateurs
 
 ## Méthodologies Employées
 
