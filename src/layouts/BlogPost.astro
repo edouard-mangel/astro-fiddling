@@ -52,6 +52,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			.prose :global(pre) {
+				width: 90vw;
+				max-width: 960px;
+				position: relative;
+				left: 50%;
+				transform: translateX(-50%);
+			}
 		</style>
 	</head>
 
