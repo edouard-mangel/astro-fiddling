@@ -2,7 +2,7 @@
 title: 'Refonte du hub de simulateurs InSimo'
 description: "Rétrospective d'un projet de refactorisation complète d'une plateforme de simulateurs chirurgicaux, livré en 8 semaines avec zéro bug en production."
 pubDate: 'Feb 09 2026'
-heroImage: '/blog-placeholder-1.jpg'
+heroImage: '/insimo-hub-courses.png'
 ---
 
 ## Contexte du Projet
@@ -59,6 +59,8 @@ Cette approche a permis une flexibilité maximale pour ajuster le périmètre se
 - Lancement des processus Unity
 - Interprétation des données de simulation
 - Récupération et analyse des résultats
+
+![Tableau de bord de résultats de simulation InSimo](/insimo-hub-results.png)
 
 ## Résultats Mesurables
 
