@@ -1,0 +1,108 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+type Props = CollectionEntry<'presentations'>['data'];
+
+const { title, description, duration, tags } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.presentation-header {
+				margin-bottom: 2em;
+				padding: 1em 0;
+				text-align: center;
+			}
+			.presentation-header h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.presentation-meta {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-top: 1em;
+			}
+			.meta-badge {
+				display: inline-block;
+				padding: 0.25em 0.75em;
+				background-color: rgb(var(--gray-light));
+				border-radius: 999px;
+				font-size: 0.85em;
+				color: rgb(var(--gray-dark));
+			}
+			.prose :global(blockquote) {
+				border-left: 4px solid var(--accent);
+				padding: 0.5em 0 0.5em 1.5em;
+				margin: 1.5em 0;
+				font-style: italic;
+				color: rgb(var(--gray));
+			}
+			.prose :global(.cta-button) {
+				display: inline-block;
+				padding: 0.75em 1.5em;
+				background-color: var(--accent);
+				color: white;
+				text-decoration: none;
+				border-radius: 8px;
+				font-weight: 700;
+				transition: background-color 0.2s;
+				margin: 1em 0;
+			}
+			.prose :global(.cta-button:hover) {
+				background-color: var(--accent-dark);
+				color: white;
+			}
+			.prose :global(.cta-section) {
+				text-align: center;
+				margin: 2em 0;
+			}
+			.prose :global(.cta-separator) {
+				display: inline-block;
+				margin: 0 1em;
+				color: rgb(var(--gray));
+			}
+			.prose :global(.cta-link) {
+				font-weight: 700;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="prose">
+					<div class="presentation-header">
+						<h1>{title}</h1>
+						<div class="presentation-meta">
+							{duration && <span class="meta-badge">{duration}</span>}
+							{tags && tags.map((tag) => <span class="meta-badge">{tag}</span>)}
+						</div>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

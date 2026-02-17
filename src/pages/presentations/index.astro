@@ -1,0 +1,143 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+import { getCollection } from 'astro:content';
+
+const presentations = await getCollection('presentations');
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<BaseHead title={`Présentations – ${SITE_TITLE}`} description="Découvrez mes conférences et présentations techniques. Disponible pour des Brown Bag Lunches en entreprise." />
+		<style>
+			main {
+				width: 960px;
+			}
+			.intro {
+				margin-bottom: 3rem;
+			}
+			.intro h1 {
+				margin-bottom: 1rem;
+			}
+			.bbl-section {
+				background: linear-gradient(135deg, rgba(var(--gray-light), 0.5), rgba(var(--gray-light), 0.2));
+				border-radius: 12px;
+				padding: 1.5em 2em;
+				margin: 2rem 0;
+			}
+			.bbl-section h2 {
+				font-size: 1.563em;
+				margin-bottom: 0.5em;
+			}
+			.bbl-cta {
+				display: inline-block;
+				padding: 0.75em 1.5em;
+				background-color: var(--accent);
+				color: white;
+				text-decoration: none;
+				border-radius: 8px;
+				font-weight: 700;
+				transition: background-color 0.2s;
+				margin-top: 0.5em;
+			}
+			.bbl-cta:hover {
+				background-color: var(--accent-dark);
+				color: white;
+			}
+			.presentations-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.presentations-list li {
+				margin-bottom: 2rem;
+			}
+			.presentation-card {
+				display: block;
+				padding: 1.5em;
+				border-radius: 12px;
+				border: 1px solid rgb(var(--gray-light));
+				text-decoration: none;
+				transition: box-shadow 0.2s, transform 0.2s;
+			}
+			.presentation-card:hover {
+				box-shadow: var(--box-shadow);
+				transform: translateY(-2px);
+			}
+			.presentation-card h3 {
+				margin: 0 0 0.5em 0;
+				color: rgb(var(--black));
+			}
+			.presentation-card p {
+				margin: 0 0 0.75em 0;
+				color: rgb(var(--gray));
+			}
+			.presentation-meta {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+			}
+			.meta-badge {
+				display: inline-block;
+				padding: 0.15em 0.6em;
+				background-color: rgb(var(--gray-light));
+				border-radius: 999px;
+				font-size: 0.8em;
+				color: rgb(var(--gray-dark));
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="intro">
+				<h1>Présentations</h1>
+				<p>
+					Je propose des conférences techniques autour du software craftsmanship,
+					de l'architecture logicielle et des bonnes pratiques de développement.
+				</p>
+
+				<div class="bbl-section">
+					<h2>Brown Bag Lunch</h2>
+					<p>
+						Vous souhaitez organiser une session technique dans vos locaux ?
+						Je me déplace dans votre entreprise pour un <strong>Brown Bag Lunch</strong> :
+						une présentation informelle sur la pause déjeuner, suivie d'un échange avec vos équipes.
+					</p>
+					<p>
+						C'est gratuit, il suffit de fournir le déjeuner !
+						Idéal pour sensibiliser vos développeurs aux enjeux du legacy, du couplage
+						et des pratiques craft.
+					</p>
+					<a href="mailto:edouard@lacrafterie.tech?subject=Brown%20Bag%20Lunch" class="bbl-cta">
+						Inviter pour un Brown Bag Lunch
+					</a>
+				</div>
+			</section>
+
+			<section>
+				<h2>Mes conférences</h2>
+				<ul class="presentations-list">
+					{
+						presentations.map((presentation) => (
+							<li>
+								<a href={`/presentations/${presentation.id}/`} class="presentation-card">
+									<h3>{presentation.data.title}</h3>
+									<p>{presentation.data.description}</p>
+									<div class="presentation-meta">
+										{presentation.data.duration && <span class="meta-badge">{presentation.data.duration}</span>}
+										{presentation.data.tags && presentation.data.tags.map((tag) => <span class="meta-badge">{tag}</span>)}
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
