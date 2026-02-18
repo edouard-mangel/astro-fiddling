@@ -4,7 +4,7 @@ description: "Le couplage entre composants est la première source de rigidité 
 pubDate: 'Feb 23 2026'
 ---
 
-## Le concept le plus sous-estimé du développement
+## Définition
 
 Quand on parle de qualité de code, on pense souvent aux tests, aux design patterns, au clean code. Mais il y a un concept plus fondamental que tous les autres : le **couplage**.
 
@@ -12,9 +12,59 @@ Le couplage entre deux composants mesure le volume d'informations qu'ils échang
 
 On parle de couplage **fort** (ou serré) quand deux composants échangent beaucoup de données. Et de couplage **faible** quand ils sont indépendants ou n'échangent qu'un minimum d'information.
 
+## Ce qui se passe quand le couplage n'est pas maîtrisé
+
+Plus le couplage est fort, plus :
+
+- **Modifier un composant entraîne la modification des autres** — l'effet domino
+- **La structure du programme est rigide** — chaque évolution coûte cher
+- **L'estimation est impossible** — on ne peut pas prédire l'étendue des modifications nécessaires
+- **Les tests sont difficiles** — impossible de tester un composant isolément
+- **Le DRY devient un piège** — vouloir mutualiser du code entre composants couplés ne fait qu'[aggraver le problème](/blog/dry-mal-applique-piege-du-couplage/)
+
+La première victime du couplage fort, c'est le planning.
+
+Et le problème ne s'arrête pas là : **le couplage est transitif**. Si A dépend de B et B dépend de C, alors A dépend indirectement de C — même si A ne connaît pas l'existence de C.
+
+```mermaid
+graph LR
+    A[OrderController] --> B[OrderService]
+    B --> C[OrderRepository]
+    C --> D[("Base de données")]
+
+    style A fill:#15803d,stroke:#86efac,color:#fff
+    style D fill:#8B0000,stroke:#FFD700,color:#fff
+```
+
+Dans cet exemple, `OrderController` ne parle pas directement à la base de données. Mais si le schéma de la base change, le repository change, le service change... et le contrôleur aussi. **Le couplage s'est propagé à travers toute la chaîne.**
+
+C'est rarement un problème quand la chaîne est courte. Mais dans un projet réel, les chaînes de dépendances forment un graphe complexe :
+
+```mermaid
+graph TD
+    A[OrderController] --> B[OrderService]
+    A --> Auth[AuthService]
+    B --> C[OrderRepository]
+    B --> D[PaymentService]
+    B --> E[NotificationService]
+    D --> F[PaymentGateway]
+    D --> Auth
+    E --> G[EmailProvider]
+    E --> Auth
+    C --> DB[("Base de données")]
+    F --> ExtAPI[("API Bancaire")]
+
+    style DB fill:#8B0000,stroke:#FFD700,color:#fff
+    style ExtAPI fill:#8B0000,stroke:#FFD700,color:#fff
+```
+
+Modifier `AuthService` impacte potentiellement `OrderController`, `PaymentService` *et* `NotificationService`. Modifier le schéma de la base de données se propage de `OrderRepository` jusqu'au contrôleur. **Un changement dans un composant bas niveau peut remonter et impacter toute l'application.**
+
+Le couplage ne se limite presque jamais à deux composants. L'effet domino est la norme, pas l'exception.
+
 ## Les 7 niveaux de couplage
 
-Selon Pressman, il existe sept niveaux de couplage, du plus faible au plus fort. Les connaître permet de diagnostiquer la santé d'une codebase.
+Maintenant qu'on a vu les dégâts, comment les diagnostiquer ? Selon Pressman, il existe sept niveaux de couplage, du plus faible au plus fort. Les connaître permet de diagnostiquer la santé d'une codebase.
 
 ### 1. Sans couplage
 
@@ -62,8 +112,6 @@ public class OrderService
 
 La conséquence : si la structure de `Order` change, tous les consommateurs doivent s'adapter.
 
-
-
 ### 4. Par contrôle
 
 Un composant contrôle le comportement d'un autre via un drapeau ou un paramètre de type "mode".
@@ -87,20 +135,19 @@ Le composant appelant décide *comment* l'autre doit travailler. C'est un signal
 
 Les composants communiquent via un moyen externe : fichier partagé, pipeline, API tierce.
 
-```csharp
-// Service A écrit dans un fichier
-File.WriteAllText("/shared/data.json", json);
+```mermaid
+graph LR
+    A[Application A] -->|écrit| F[("/shared/data.json")]
+    F -->|lit| B[Application B]
 
-// Service B lit le même fichier
-var data = File.ReadAllText("/shared/data.json");
+    style F fill:#8B0000,stroke:#FFD700,color:#fff
 ```
 
 Le couplage est implicite et fragile : rien dans le code ne documente cette dépendance.
 
-Ce couplage peut être assez vicieux, en particulier quand ce sont des équipes séparées qui maintiennent les composants. 
+Ce couplage peut être assez vicieux, en particulier quand ce sont des équipes séparées qui maintiennent les composants.
 
-Les bugs liés à ce type de couplage sont souvent difficiles à diagnostiquer : il n'y a aucune analyse statique possible, et on n'a pas toujours la possibilité d'instancier un environnement complet dans des tests auto ou une pipeline de CI/CD. 
-
+Les bugs liés à ce type de couplage sont souvent difficiles à diagnostiquer : il n'y a aucune analyse statique possible, et on n'a pas toujours la possibilité d'instancier un environnement complet dans des tests auto ou une pipeline de CI/CD.
 
 ### 6. Commun (global)
 
@@ -179,16 +226,21 @@ public class OrderService
 
 C'est le niveau le plus fort : les composants n'ont plus aucune frontière. Toute modification est un risque.
 
-## Les conséquences d'un couplage fort
+Et il y a une forme de couplage par contenu qu'on utilise tous les jours sans y penser : **l'héritage**. Quand une classe hérite d'une autre, elle a accès à ses champs internes, ses méthodes protégées, sa logique d'initialisation. Elle dépend de *tout* ce que fait la classe parente — y compris de ses détails d'implémentation.
 
-Plus le couplage est fort, plus :
+```csharp
+public class SpecialOrder : Order
+{
+    public override decimal GetTotal()
+    {
+        // Dépend du calcul interne de Order
+        // Si Order change sa logique, SpecialOrder casse
+        return base.GetTotal() * 0.9m;
+    }
+}
+```
 
-- **Modifier un composant entraîne la modification des autres** — l'effet domino
-- **La structure du programme est rigide** — chaque évolution coûte cher
-- **L'estimation est impossible** — on ne peut pas prédire l'étendue des modifications nécessaires
-- **Les tests sont difficiles** — impossible de tester un composant isolément
-
-La première victime du couplage fort, c'est le planning.
+C'est pour cette raison que le Gang of Four recommande de **favoriser la composition plutôt que l'héritage**. L'héritage est la forme la plus forte de couplage entre deux classes.
 
 ## Comment détecter un couplage trop fort
 
