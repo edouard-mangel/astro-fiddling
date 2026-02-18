@@ -1,7 +1,7 @@
 ---
 title: 'Refonte du hub de simulateurs InSimo'
 description: "Rétrospective d'un projet de refactorisation complète d'une plateforme de simulateurs chirurgicaux, livré en 8 semaines avec zéro bug en production."
-pubDate: 'Feb 09 2026'
+pubDate: 'Sept 10 2025'
 heroImage: '/insimo-hub-courses.png'
 ---
 
