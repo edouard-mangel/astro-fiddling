@@ -1,7 +1,7 @@
 ---
 title: "La cohésion : quand une classe fait trop de choses"
 description: "Vos classes s'appellent Manager, Handler ou Utils ? C'est probablement un problème de cohésion. Découvrez les 7 niveaux de cohésion et comment ils structurent un code maintenable."
-pubDate: 'Feb 24 2026'
+pubDate: 'Mar 2 2026'
 ---
 
 Dans l'article précédent sur [le couplage](/blog/couplage-pourquoi-modifier-a-casse-b/), on a vu comment les dépendances entre composants rigidifient un système. Aujourd'hui, on s'intéresse à l'autre face de la pièce : ce qui se passe *à l'intérieur* d'un composant.
